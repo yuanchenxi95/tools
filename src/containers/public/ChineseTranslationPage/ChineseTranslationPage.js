@@ -1,7 +1,7 @@
 import { observer, inject } from 'mobx-react'
 import React, { Component } from 'react'
-import { Jumbotron, Form, FormGroup, Label, Input, TabContent, Button,
-  TabPane, Nav, NavItem, NavLink } from 'reactstrap'
+import { CardTitle, Card, Form, FormGroup, Label, Input, TabContent, Button,
+  TabPane, Nav, NavItem, NavLink, ButtonGroup } from 'reactstrap'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
@@ -62,21 +62,27 @@ class ChineseTranslationPage extends Component {
   }
 
   renderCopyButton() {
-    const { translatedSentence, copied, onCopy } = this.props
+    const { translatedSentence, copied, onCopy, setSentence } = this.props
     return (
-      <CopyToClipboard
-        text={translatedSentence}
-        onCopy={() => { onCopy() }}>
-        <Button color={'primary'} block disabled={copied === true}>
-          {copied === true ?
-            'Copied | 复制成功'
-            :
-            'Copy | 复制'
-          }
-        </Button>
-      </CopyToClipboard>
+      <div className={classnames('featureButtonGroup')}>
+        <ButtonGroup>
+          <Button color={'primary'} onClick={() => { setSentence('') }}>
+            Clear the Context | 清空文本
+          </Button>
+          <CopyToClipboard
+            text={translatedSentence}
+            onCopy={() => { onCopy() }}>
+            <Button color={'success'} disabled={copied === true}>
+              {copied === true ?
+                'Copied | 复制成功'
+                :
+                'Copy | 复制'
+              }
+            </Button>
+          </CopyToClipboard>
+        </ButtonGroup>
+      </div>
     )
-
   }
 
 
@@ -84,10 +90,16 @@ class ChineseTranslationPage extends Component {
     const { setToSimplified, setToTraditional, translatedSentence, inputMode, sentence } = this.props
     return (
       <div>
-        <Jumbotron>
-          <h3 className='display-5'>Simplified Chinese and Traditional Chinese Converter</h3>
-          <h3 className='display-5'>简繁转化工具</h3>
-        </Jumbotron>
+
+        <Card body>
+          <CardTitle>
+            Simplified Chinese and Traditional Chinese Converter
+            <br/>
+            简繁转化工具
+          </CardTitle>
+        </Card>
+        {this.renderCopyButton()}
+
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -168,8 +180,6 @@ class ChineseTranslationPage extends Component {
               </FormGroup>
             </Form>
           </TabPane>
-          {this.renderCopyButton()}
-
 
         </TabContent>
 

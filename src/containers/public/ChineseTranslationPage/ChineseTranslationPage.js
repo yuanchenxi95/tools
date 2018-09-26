@@ -67,7 +67,7 @@ class ChineseTranslationPage extends Component {
       <div className={classnames('featureButtonGroup')}>
         <ButtonGroup>
           <Button color={'primary'} onClick={() => { setSentence('') }}>
-            Clear the Context | 清空文本
+            Clear | 清空
           </Button>
           <CopyToClipboard
             text={translatedSentence}

@@ -11,13 +11,15 @@ class HomePage extends Component {
   render() {
     return (
       <div>
-        主页面
+        <h1>主页面</h1>
         <br/>
         <Link to={CHINESE_TRANSLATION}>
-          <Button color={'primary'} block>
-            Simplified-Traditional Chinese Conversion
-            <br/>
-            汉繁转化
+          <Button color={'info'} block>
+            <h4>
+              Simplified-Traditional Chinese Conversion
+              <br/>
+              汉繁转化
+            </h4>
           </Button>
         </Link>
       </div>

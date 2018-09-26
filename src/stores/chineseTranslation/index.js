@@ -20,6 +20,7 @@ const sampleSentence = 'MobX 是一个经过战火洗礼的库，它通过透明
 class ChineseTranslation {
   @observable sentence = sampleSentence
   @observable inputMode = SIMPLIFIED
+  @observable copied = false
 
   constructor() {
 
@@ -27,14 +28,24 @@ class ChineseTranslation {
 
   @action setSentence(sentence) {
     self.sentence = sentence
+    self.copied = false
+  }
+
+  @action onCopy() {
+    self.copied = true
+  }
+
+  @action setMode(mode) {
+    self.inputMode = mode
+    self.copied = false
   }
 
   @action setToSimplified() {
-    self.inputMode = SIMPLIFIED
+    self.setMode(SIMPLIFIED)
   }
 
   @action setToTraditional() {
-    self.inputMode = TRADITIONAL
+    self.setMode(TRADITIONAL)
   }
 
   @computed get translatedSentence() {

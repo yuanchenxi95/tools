@@ -17,7 +17,6 @@ const conversionFunction = function(sentence, dict) {
       return word
     }
   })
-  console.log(sentenceArray)
   return translatedSentence.join('')
 }
 

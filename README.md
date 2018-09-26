@@ -10,3 +10,5 @@ TODO:
 4. code highlighter
 5. compress & uncompress
 6. uuid generator
+7. Hash
+8. Encrypt & Decrypt

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button } from 'reactstrap'
+import { Button, Card, CardBody, CardTitle, CardText } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import { translate } from 'react-i18next'
 import PropTypes from 'prop-types'
@@ -25,16 +25,21 @@ class HomePage extends Component {
       <div>
         <h1>{t(keys.homePageText)}</h1>
         <br/>
-        <Link to={CHINESE_TRANSLATION}>
-          <Button color={'info'} block>
-            <h4>
-              {/*Simplified-Traditional Chinese Conversion*/}
-              {/*<br/>*/}
-              {/*汉繁转化*/}
+        <Card body>
+          <CardBody>
+            <CardTitle>
               {t(keys.chineseTranslationConverter)}
-            </h4>
-          </Button>
-        </Link>
+            </CardTitle>
+            <CardText>
+              {t(keys.chineseConverterDescription)}
+            </CardText>
+            <Link to={CHINESE_TRANSLATION}>
+              <Button color={'info'} >
+                {t(keys.goto)}
+              </Button>
+            </Link>
+          </CardBody>
+        </Card>
       </div>
     )
   }

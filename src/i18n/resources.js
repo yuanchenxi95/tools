@@ -67,3 +67,15 @@ zh[keys.list] = '列表'
 keys['language'] = 'language'
 en[keys.language] = 'Language'
 zh[keys.language] = '语言'
+
+keys['goto'] = 'goto'
+en[keys.goto] = 'go to the page'
+zh[keys.goto] = '前往页面'
+
+// long text
+keys['chineseConverterDescription'] = 'chineseConverterDescription'
+en[keys.chineseConverterDescription] = 'The Simplified-Traditional Chinese Conversion is designed to provide' +
+  ' users with Chinese words conversion. This tool presents some guidelines for making Chinese sentence conversions.' +
+  'The source of database is Unihan Database.'
+zh[keys.chineseConverterDescription] = '繁简转换旨在为用户提供只针对单字的转换，是进一步实现地区词转换的基础。' +
+  '本工具提出一些进行繁简转换编辑维护的指引。词库来源为 Unihan Database'

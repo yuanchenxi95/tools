@@ -5,7 +5,7 @@ import { Navbar, Nav, NavbarBrand, NavItem,
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
-import { FaLanguage } from 'react-icons/fa'
+// import { FaLanguage } from 'react-icons/fa'
 
 import { ROOT, CHINESE_TRANSLATION } from '../constants/route'
 import { keys } from 'src/i18n/resources'
@@ -65,7 +65,9 @@ class NavBar extends Component {
             <NavItem>
               <Dropdown nav isOpen={this.state.languageDropdownOpen} toggle={this.toggle}>
                 <DropdownToggle nav caret>
-                  <FaLanguage size={40}/>
+                  {/*<FaLanguage size={40}/>*/}
+                  {/*{t(keys.language)}*/}
+                  Language / 语言
                 </DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem header>{t(keys.language)}</DropdownItem>

@@ -12,3 +12,6 @@ TODO:
 6. uuid generator
 7. Hash
 8. Encrypt & Decrypt
+
+ISSUES:
+1. react icons bundle file too large

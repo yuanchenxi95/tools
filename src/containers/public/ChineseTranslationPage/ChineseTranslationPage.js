@@ -95,9 +95,7 @@ class ChineseTranslationPage extends Component {
 
         <Card body>
           <CardTitle>
-            <h4>
-              {t(keys.chineseTranslationConverter)}
-            </h4>
+            {t(keys.chineseTranslationConverter)}
           </CardTitle>
         </Card>
         {this.renderCopyButton()}
@@ -122,6 +120,7 @@ class ChineseTranslationPage extends Component {
         </Nav>
         <TabContent activeTab={inputMode}>
           <TabPane tabId={SIMPLIFIED}>
+            <br/>
             <Form>
               <FormGroup>
                 <Label for="chineseInput">
@@ -153,6 +152,7 @@ class ChineseTranslationPage extends Component {
             </Form>
           </TabPane>
           <TabPane tabId={TRADITIONAL}>
+            <br/>
             <Form>
               <FormGroup>
                 <Label for="translated">

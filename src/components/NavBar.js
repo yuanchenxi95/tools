@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
-import { Navbar, Nav, NavbarBrand, NavItem,
-  NavLink, Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { Navbar, Nav, NavbarBrand, NavItem, NavbarToggler,
+  NavLink, Collapse, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
-// import { FaLanguage } from 'react-icons/fa'
+import { FaLanguage } from 'react-icons/fa'
 
 import { ROOT, CHINESE_TRANSLATION } from '../constants/route'
 import { keys } from 'src/i18n/resources'
@@ -24,9 +24,12 @@ class NavBar extends Component {
   constructor(props) {
     super(props)
 
-    this.toggle = this.toggle.bind(this)
+    this.toggleLanguageDropDown = this.toggleLanguageDropDown.bind(this)
+    this.toggleListDropDown = this.toggleListDropDown.bind(this)
+    this.renderNavBarList = this.renderNavBarList.bind(this)
     this.state = {
       languageDropdownOpen: false,
+      listDropdownOpen: false,
     }
   }
 
@@ -37,10 +40,35 @@ class NavBar extends Component {
     // logOut: PropTypes.func.isRequired,
   }
 
-  toggle() {
+  toggleLanguageDropDown() {
     this.setState({
       languageDropdownOpen: !this.state.languageDropdownOpen,
     })
+  }
+
+  toggleListDropDown() {
+    this.setState({
+      listDropdownOpen: !this.state.listDropdownOpen,
+    })
+  }
+
+
+  renderNavBarList() {
+    const { t } = this.props
+    return (
+      <div>
+        <NavbarToggler onClick={this.toggleListDropDown} />
+        <Collapse isOpen={this.state.listDropdownOpen} navbar>
+          <Nav navbar>
+            <NavItem>
+              <NavLink tag={Link} to={CHINESE_TRANSLATION}>
+                {t(keys.chineseTranslationConverterShort)}
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </div>
+    )
   }
 
   render() {
@@ -49,33 +77,21 @@ class NavBar extends Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand>
-            <NavLink tag={Link} to={ROOT}>
-              {t(keys.tools)}
-            </NavLink>
+          <NavbarBrand tag={Link} to={ROOT}>
+            {t(keys.tools)}
           </NavbarBrand>
-          <Nav navbar>
-            <NavItem>
-              <NavLink tag={Link} to={CHINESE_TRANSLATION}>
-                {t(keys.chineseTranslationConverterShort)}
-              </NavLink>
-            </NavItem>
-          </Nav>
+          {this.renderNavBarList()}
           <Nav className="ml-auto" navbar>
-            <NavItem>
-              <Dropdown nav isOpen={this.state.languageDropdownOpen} toggle={this.toggle}>
-                <DropdownToggle nav caret>
-                  {/*<FaLanguage size={40}/>*/}
-                  {/*{t(keys.language)}*/}
-                  Language / 语言
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem header>{t(keys.language)}</DropdownItem>
-                  <DropdownItem onClick={setLocaleToEnglish}>English</DropdownItem>
-                  <DropdownItem onClick={setLocaleToChinese}>中文</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </NavItem>
+            <Dropdown nav isOpen={this.state.languageDropdownOpen} toggle={this.toggleLanguageDropDown}>
+              <DropdownToggle nav caret>
+                <FaLanguage size={40}/>
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem header>{t(keys.language)}</DropdownItem>
+                <DropdownItem onClick={setLocaleToEnglish}>English</DropdownItem>
+                <DropdownItem onClick={setLocaleToChinese}>中文</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
           </Nav>
         </Navbar>
       </div>

@@ -4,10 +4,12 @@ import { CardTitle, Card, Form, FormGroup, Label, Input, TabContent, Button,
   TabPane, Nav, NavItem, NavLink, ButtonGroup } from 'reactstrap'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import { translate } from 'react-i18next'
 
 import './ChineseTranslationPage.css'
 import { CHINESE_MODE_ENUM } from 'src/constants/enum'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { keys } from 'src/i18n/resources'
 
 const {
   TRADITIONAL,
@@ -37,11 +39,12 @@ const {
     onCopy,
   }
 })
+@translate()
 @observer
 class ChineseTranslationPage extends Component {
   constructor(props) {
     super(props)
-    this.handSentenceChange = this.handSentenceChange.bind(this)
+    this.handleSentenceChange = this.handleSentenceChange.bind(this)
     this.renderCopyButton = this.renderCopyButton.bind(this)
   }
 
@@ -54,29 +57,28 @@ class ChineseTranslationPage extends Component {
     setToTraditional: PropTypes.func.isRequired,
     copied: PropTypes.bool.isRequired,
     onCopy: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
-  handSentenceChange(e) {
+  handleSentenceChange(e) {
     e.preventDefault()
     this.props.setSentence(e.target.value)
   }
 
   renderCopyButton() {
-    const { translatedSentence, copied, onCopy, setSentence } = this.props
+    const { translatedSentence, copied, onCopy, setSentence, t } = this.props
     return (
       <div className={classnames('featureButtonGroup')}>
         <ButtonGroup>
           <Button color={'primary'} onClick={() => { setSentence('') }}>
-            Clear | 清空
+            {t(keys.clear)}
           </Button>
           <CopyToClipboard
             text={translatedSentence}
             onCopy={() => { onCopy() }}>
             <Button color={'success'} disabled={copied === true}>
-              {copied === true ?
-                'Copied | 复制成功'
-                :
-                'Copy | 复制'
+              {
+                copied === true ? t(keys.copied) : t(keys.copy)
               }
             </Button>
           </CopyToClipboard>
@@ -87,15 +89,15 @@ class ChineseTranslationPage extends Component {
 
 
   render() {
-    const { setToSimplified, setToTraditional, translatedSentence, inputMode, sentence } = this.props
+    const { setToSimplified, setToTraditional, translatedSentence, inputMode, sentence, t } = this.props
     return (
       <div>
 
         <Card body>
           <CardTitle>
-            Simplified Chinese and Traditional Chinese Converter
-            <br/>
-            简繁转化工具
+            <h4>
+              {t(keys.chineseTranslationConverter)}
+            </h4>
           </CardTitle>
         </Card>
         {this.renderCopyButton()}
@@ -106,7 +108,7 @@ class ChineseTranslationPage extends Component {
               className={classnames({ active: SIMPLIFIED === inputMode })}
               onClick={() => { setToSimplified() }}
             >
-              简转繁
+              {t(keys.simplifiedToTraditional)}
             </NavLink>
           </NavItem>
           <NavItem>
@@ -114,7 +116,7 @@ class ChineseTranslationPage extends Component {
               className={classnames({ active: TRADITIONAL === inputMode })}
               onClick={() => { setToTraditional() }}
             >
-              繁转简
+              {t(keys.traditionalToSimplified)}
             </NavLink>
           </NavItem>
         </Nav>
@@ -123,20 +125,20 @@ class ChineseTranslationPage extends Component {
             <Form>
               <FormGroup>
                 <Label for="chineseInput">
-                  <h4>Simplified Chinese | 简体中文</h4>
+                  <h4>{t(keys.simplifiedChinese)}</h4>
                 </Label>
                 <Input
                   type="textarea"
                   id="chineseInput"
                   rows="6"
                   className={'sentenceArea'}
-                  onChange={this.handSentenceChange}
+                  onChange={this.handleSentenceChange}
                   value={sentence}
                 />
               </FormGroup>
               <FormGroup>
                 <Label for="translated">
-                  <h4>Traditional Chinese | 繁体中文</h4>
+                  <h4>{t(keys.traditionalChinese)}</h4>
                 </Label>
                 <Input
                   type="textarea"
@@ -154,20 +156,20 @@ class ChineseTranslationPage extends Component {
             <Form>
               <FormGroup>
                 <Label for="translated">
-                  <h4>Traditional Chinese | 繁体中文</h4>
+                  <h4>{t(keys.traditionalChinese)}</h4>
                 </Label>
                 <Input
                   type="textarea"
                   id="translated"
                   rows="6"
                   className={'sentenceArea'}
-                  onChange={this.handSentenceChange}
+                  onChange={this.handleSentenceChange}
                   value={sentence}
                 />
               </FormGroup>
               <FormGroup>
                 <Label for="chineseInput">
-                  <h4>Simplified Chinese | 简体中文</h4>
+                  <h4>{t(keys.simplifiedChinese)}</h4>
                 </Label>
                 <Input
                   type="textarea"

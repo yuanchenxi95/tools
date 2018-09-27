@@ -21,10 +21,12 @@ class PublicRoutePage extends Component {
 
   render() {
     return (
-      <Switch>
-        <Route path={CHINESE_TRANSLATION} component={ChineseTranslationPage} />
-        <Route component={FallbackPage}/>
-      </Switch>
+      <div>
+        <Switch>
+          <Route path={CHINESE_TRANSLATION} component={ChineseTranslationPage} />
+          <Route component={FallbackPage}/>
+        </Switch>
+      </div>
     )
   }
 }

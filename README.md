@@ -12,6 +12,7 @@ TODO:
 6. uuid generator
 7. Hash
 8. Encrypt & Decrypt
+9. Chmod Calculator
 
 ISSUES:
 1. react icons bundle file too large
